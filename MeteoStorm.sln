@@ -5,7 +5,12 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeteoStorm.Daemon", "MeteoStorm.Daemon\MeteoStorm.Daemon.csproj", "{AF8EFC1B-63B2-4950-BAF6-3122B875FE3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteoStorm.DataAccess", "MeteoStorm.DataAccess\MeteoStorm.DataAccess.csproj", "{36E52652-3298-4790-A1E6-53323EB2C166}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeteoStorm.DataAccess", "MeteoStorm.DataAccess\MeteoStorm.DataAccess.csproj", "{36E52652-3298-4790-A1E6-53323EB2C166}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{BA0B90CD-D9C9-41A0-9CE1-F455059BEA16}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
