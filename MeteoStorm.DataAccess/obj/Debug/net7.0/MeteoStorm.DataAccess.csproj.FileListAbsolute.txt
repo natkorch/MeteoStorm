@@ -1,0 +1,12 @@
+D:\repo\MeteoStorm\MeteoStorm.DataAccess\bin\Debug\net7.0\MeteoStorm.DataAccess.deps.json
+D:\repo\MeteoStorm\MeteoStorm.DataAccess\bin\Debug\net7.0\MeteoStorm.DataAccess.dll
+D:\repo\MeteoStorm\MeteoStorm.DataAccess\bin\Debug\net7.0\MeteoStorm.DataAccess.pdb
+D:\repo\MeteoStorm\MeteoStorm.DataAccess\obj\Debug\net7.0\MeteoStorm.DataAccess.csproj.AssemblyReference.cache
+D:\repo\MeteoStorm\MeteoStorm.DataAccess\obj\Debug\net7.0\MeteoStorm.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+D:\repo\MeteoStorm\MeteoStorm.DataAccess\obj\Debug\net7.0\MeteoStorm.DataAccess.AssemblyInfoInputs.cache
+D:\repo\MeteoStorm\MeteoStorm.DataAccess\obj\Debug\net7.0\MeteoStorm.DataAccess.AssemblyInfo.cs
+D:\repo\MeteoStorm\MeteoStorm.DataAccess\obj\Debug\net7.0\MeteoStorm.DataAccess.csproj.CoreCompileInputs.cache
+D:\repo\MeteoStorm\MeteoStorm.DataAccess\obj\Debug\net7.0\MeteoStorm.DataAccess.dll
+D:\repo\MeteoStorm\MeteoStorm.DataAccess\obj\Debug\net7.0\refint\MeteoStorm.DataAccess.dll
+D:\repo\MeteoStorm\MeteoStorm.DataAccess\obj\Debug\net7.0\MeteoStorm.DataAccess.pdb
+D:\repo\MeteoStorm\MeteoStorm.DataAccess\obj\Debug\net7.0\ref\MeteoStorm.DataAccess.dll
