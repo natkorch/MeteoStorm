@@ -1,6 +1,7 @@
 ﻿using MeteoStorm.DataAccess.Models;
 using MeteoStorm.DataAccess.Configuration;
 using Microsoft.EntityFrameworkCore;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MeteoStorm.DataAccess
 {
@@ -12,6 +13,10 @@ namespace MeteoStorm.DataAccess
 
     public MeteoStormDbContext(DbContextOptions<MeteoStormDbContext> options)
         : base(options)
+    {
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
     }
 

@@ -13,6 +13,10 @@ namespace MeteoStorm.DataAccess.Models
     public int Id { get; protected set; }
 
     /// <summary>
+    /// Идентификатор города в таблице Cities
+    /// </summary>
+    public int CityId { get; internal set; }
+    /// <summary>
     /// Город
     /// </summary>
     public virtual City City { get; set; }
