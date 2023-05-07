@@ -1,4 +1,6 @@
 using Serilog;
+using Serilog.Filters;
+using Services.WeatherGatherer;
 
 namespace MeteoStorm.Daemon
 {
@@ -37,15 +39,20 @@ namespace MeteoStorm.Daemon
     {
       Log.Logger = new LoggerConfiguration()
        .WriteTo.Logger(lg =>
-         lg
+            lg
            .MinimumLevel.Debug()
+           .Filter.ByExcluding(Matching.FromSource<WttrClient>())
            .WriteTo.Console()
            .WriteTo.File(@"Logs\trace-.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 90)
        )
        .WriteTo.Logger(lg =>
+           lg.Filter.ByIncludingOnly(Matching.FromSource<WttrClient>())
+           .WriteTo.Console()
+           .WriteTo.File(@"Logs\wttr-client-.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 90)
+         )
+       .WriteTo.Logger(lg =>
           lg
           .MinimumLevel.Error()
-          .WriteTo.Console()
           .WriteTo.File(@"Logs\error-.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 90)
       )
       .CreateLogger();

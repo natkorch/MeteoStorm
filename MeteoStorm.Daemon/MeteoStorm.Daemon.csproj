@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -23,6 +23,9 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="7.0.0" />
     <PackageReference Include="Quartz" Version="3.6.2" />
+    <PackageReference Include="Quartz.AspNetCore" Version="3.6.2" />
+    <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.6.2" />
+    <PackageReference Include="Quartz.Extensions.Hosting" Version="3.6.2" />
     <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
@@ -30,5 +33,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MeteoStorm.DataAccess\MeteoStorm.DataAccess.csproj" />
+    <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 </Project>
