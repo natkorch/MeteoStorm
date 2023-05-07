@@ -1,21 +1,17 @@
 using MeteoStorm.Daemon.Jobs;
-using MeteoStorm.Daemon.Quartz;
-using Quartz.Impl;
-using Quartz.Spi;
 using Quartz;
 using Serilog;
-using System.Configuration;
 using MeteoStorm.DataAccess;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using Services.WeatherGatherer;
 
 namespace MeteoStorm.Daemon
 {
   public class Worker : BackgroundService
   {
     private IServiceProvider _serviceProvider;
-    private App _app;
     private readonly IConfiguration _config;
+    private IScheduler _scheduler;
 
     public Worker(IConfiguration config)
     {
@@ -25,14 +21,19 @@ namespace MeteoStorm.Daemon
     public void ConfigureServices(ServiceCollection services)
     {
       services.AddLogging(config => config.AddSerilog());
-      services.AddSingleton<ISchedulerFactory>(x => new StdSchedulerFactory());
-      services.AddSingleton<IJobFactory, InjectionJobFactory>();
-      services.AddSingleton<HeartBeatJob>();
-      services.AddTransient<App>();
 
       services.AddDbContext<MeteoStormDbContext>(options =>
       {
         options.UseSqlServer(_config.GetConnectionString("MeteoStormDb"));
+      });
+
+      services.AddTransient<IWeatherClient>(sp => 
+        WeatherClientFactory.ChooseWeatherClient(_config["WeatherService:Name"]));
+
+      services.AddQuartz(q =>
+      {
+        q.UseMicrosoftDependencyInjectionJobFactory();
+        JobScheduler.ScheduleJobs(q);
       });
     }
 
@@ -41,14 +42,13 @@ namespace MeteoStorm.Daemon
       var services = new ServiceCollection();
       ConfigureServices(services);
       _serviceProvider = services.BuildServiceProvider();
-      _app = _serviceProvider.GetRequiredService<App>();
-      await _app.Execute(stoppingToken);
+      _scheduler = await _serviceProvider.GetService<ISchedulerFactory>().GetScheduler(stoppingToken);
+      await _scheduler.Start(stoppingToken);
     }
 
     public override async Task StopAsync(CancellationToken cancellationToken)
     {
-      await _app.Stop();
-      Log.CloseAndFlush();
+      await _scheduler.Shutdown(waitForJobsToComplete: true);
       if (_serviceProvider is IDisposable)
       {
         ((IDisposable)_serviceProvider).Dispose();

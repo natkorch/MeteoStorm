@@ -1,5 +1,4 @@
 ﻿using MeteoStorm.DataAccess;
-using MeteoStorm.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using Quartz;
 

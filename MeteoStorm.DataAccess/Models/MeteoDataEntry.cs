@@ -30,5 +30,15 @@ namespace MeteoStorm.DataAccess.Models
     /// Температура в городе на момент замера
     /// </summary>
     public double Temperature { get; set; }
+
+    public static MeteoDataEntry Create(City city, DateTimeOffset dateTime, double temperature)
+    {
+      var meteoDataEntry = new MeteoDataEntry();
+      meteoDataEntry.City = city;
+      meteoDataEntry.DateTime = dateTime;
+      meteoDataEntry.Temperature = temperature;
+
+      return meteoDataEntry;
+    }
   }
 }
