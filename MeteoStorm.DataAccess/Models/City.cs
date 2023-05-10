@@ -3,47 +3,47 @@
 namespace MeteoStorm.DataAccess.Models
 {
   /// <summary>
-  /// Город
+  /// Represents a city
   /// </summary>
   public class City: IEntity
   {
     /// <summary>
-    /// Идентификатор в базе данных
+    /// The unique identifier for this city in the database
     /// </summary>
     public int Id { get; protected set; }
 
     /// <summary>
-    /// Русское название
+    /// The name of the city in Russian
     /// </summary>
     public string RussianName { get; set; }
 
     /// <summary>
-    /// Английское название
+    /// The name of the city in English
     /// </summary>
     public string EnglishName { get; set; }
 
     /// <summary>
-    /// Широта
+    /// The latitude of the city, expressed in decimal degrees
     /// </summary>
     public decimal Latitude { get; set; }
 
     /// <summary>
-    /// Долгота
+    /// The longitude of the city, expressed in decimal degrees
     /// </summary>
     public decimal Longitude { get; set; }
 
     /// <summary>
-    /// Часовой пояс, выраженный в разнице с UTC в минутах
+    /// The time zone difference between the city and UTC, expressed in minutes
     /// </summary>
     public int TimeZoneOffset { get; set; }
 
     /// <summary>
-    /// Если флаг отмечен, по городу собирается ежедневная погодная сводка
+    /// If true, daily weather data is gathered for this city
     /// </summary>
     public bool GatherMeteoData { get; set; }
 
     /// <summary>
-    /// История метеорологических замеров
+    /// The collection of historical weather data entries for this city
     /// </summary>
     public virtual List<MeteoDataEntry> MeteoDataEntries { get; set;}
   }

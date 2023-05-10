@@ -18,21 +18,29 @@ namespace MeteoStorm.Daemon.Jobs
 
     public async Task Execute(IJobExecutionContext context)
     {
-      _logger.LogInformation("HeartBeatJob STARTED");
-      _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now.ToString());
+      try 
+      {
+        _logger.LogInformation("HeartBeatJob STARTED");
+        _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now.ToString());
 
-      var cities = await _dbContext.Cities.ToListAsync();
+        var cities = await _dbContext.Cities.ToListAsync();
 
-      var randomIndex = new Random().Next(cities.Count);
-      var randomCity = cities[randomIndex];
+        var randomIndex = new Random().Next(cities.Count);
+        var randomCity = cities[randomIndex];
 
-      var currentUtcTime = new DateTimeOffset(DateTime.UtcNow, TimeSpan.FromMinutes(0));
-      var cityTime = currentUtcTime.ToOffset(TimeSpan.FromMinutes(randomCity.TimeZoneOffset));
+        var currentUtcTime = new DateTimeOffset(DateTime.UtcNow, TimeSpan.FromMinutes(0));
+        var cityTime = currentUtcTime.ToOffset(TimeSpan.FromMinutes(randomCity.TimeZoneOffset));
 
-      _logger.LogInformation("Локальное время в городе {CityName}: {DateTime}", 
-        randomCity.RussianName, cityTime.DateTime.ToString());
+        _logger.LogInformation("Local time in {CityName}: {DateTime}",
+          randomCity.RussianName, cityTime.DateTime.ToString());
 
-      _logger.LogInformation("HeartBeatJob ENDED");
+        _logger.LogInformation("HeartBeatJob ENDED");
+      }
+
+      catch (Exception e)
+      {
+        _logger.LogError(e, "HeartBeatJob resulted in error");
+      }
     }
   }
 }

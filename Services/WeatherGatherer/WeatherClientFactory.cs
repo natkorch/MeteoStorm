@@ -6,7 +6,7 @@
     {
       switch (weatherServiceName)
       {
-        case WttrClient.WeatherServiceName:
+        case string w when w == WttrClient.WeatherServiceName:
           return new WttrClient();
         default:
           throw new Exception($"Unknown Weather Service: {weatherServiceName}");
