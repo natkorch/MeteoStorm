@@ -191,7 +191,6 @@ ModelManifest.xml
 /.vs/config/applicationhost.config
 Src/Assets/sitemap.xml
 
-
 # Android
 .gradle
 /Mobile/Android/PartnerDelivery/local.properties
