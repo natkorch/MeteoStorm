@@ -4,6 +4,7 @@ using Serilog;
 using MeteoStorm.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Services.WeatherGatherer;
+using Microsoft.Extensions.Options;
 
 namespace MeteoStorm.Daemon
 {
@@ -27,8 +28,13 @@ namespace MeteoStorm.Daemon
         options.UseSqlServer(_config.GetConnectionString("MeteoStormDb"));
       });
 
-      services.AddTransient<IWeatherClient>(sp => 
-        WeatherClientFactory.ChooseWeatherClient(_config["WeatherService:Name"]));
+      services.Configure<AppOptions>(_config.GetSection("AppOptions"));
+
+      services.AddSingleton<IWeatherClient>(sp =>
+      {
+        var options = sp.GetRequiredService<IOptions<AppOptions>>().Value;
+        return WeatherClientFactory.ChooseWeatherClient(options.WeatherService);
+      });
 
       services.AddQuartz(q =>
       {
@@ -42,7 +48,12 @@ namespace MeteoStorm.Daemon
       var services = new ServiceCollection();
       ConfigureServices(services);
       _serviceProvider = services.BuildServiceProvider();
-      _scheduler = await _serviceProvider.GetService<ISchedulerFactory>().GetScheduler(stoppingToken);
+      _scheduler = await _serviceProvider.GetRequiredService<ISchedulerFactory>().GetScheduler(stoppingToken);
+
+      var reportFolder = _serviceProvider.GetRequiredService<IOptions<AppOptions>>().Value.ReportFolder;
+      if (!Directory.Exists(reportFolder))
+        Directory.CreateDirectory(reportFolder);
+
       await _scheduler.Start(stoppingToken);
     }
 

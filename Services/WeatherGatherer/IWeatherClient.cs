@@ -4,7 +4,7 @@ namespace Services.WeatherGatherer
 {
   public interface IWeatherClient : IDisposable
   {
-    const string WeatherServiceName = "Unknown";
+    static string WeatherServiceName { get;  }
     Task<MeteoDataResultDto> GetMeteoData(MeteoDataRequestDto message);
   }
 }

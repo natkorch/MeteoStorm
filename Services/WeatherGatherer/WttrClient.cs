@@ -18,10 +18,11 @@ namespace Services.WeatherGatherer
       _client = new RestClient(BaseUrl);
     }
 
-    public const string WeatherServiceName = "wttr";
+    public static string WeatherServiceName => "wttr";
 
     public void Dispose()
     {
+      _client?.Dispose();
     }
 
     public async Task<MeteoDataResultDto> GetMeteoData(MeteoDataRequestDto meteoRequest)

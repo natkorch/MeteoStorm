@@ -3,31 +3,32 @@
 namespace MeteoStorm.DataAccess.Models
 {
   /// <summary>
-  /// Замер метеорологических данных, предоставляемый внешним сервисом
+  /// Represents a single weather measurement record
   /// </summary>
   public class MeteoDataEntry: IEntity
   {
     /// <summary>
-    /// Идентификатор в базе данных
+    /// The unique identifier for this weather measurement record in the database
     /// </summary>
     public int Id { get; protected set; }
 
     /// <summary>
-    /// Идентификатор города в таблице Cities
+    /// The unique identifier for the city where the weather was measured, as stored in the database
     /// </summary>
     public int CityId { get; internal set; }
+
     /// <summary>
-    /// Город
+    /// A reference to the City object representing the location where the weather was measured
     /// </summary>
     public virtual City City { get; set; }
 
     /// <summary>
-    /// Дата и время замера, предоставляемого метеорологическим сервисом 
+    /// The date and time when the weather measurement was taken
     /// </summary>
     public DateTimeOffset DateTime { get; set; }
 
     /// <summary>
-    /// Температура в городе на момент замера
+    /// The temperature at the time of the weather measurement, expressed in Celsius
     /// </summary>
     public double Temperature { get; set; }
 
