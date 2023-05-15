@@ -42,17 +42,20 @@ namespace MeteoStorm.Daemon
             lg
            .MinimumLevel.Debug()
            .Filter.ByExcluding(Matching.FromSource<WttrClient>())
+           .Enrich.FromLogContext()
            .WriteTo.Console()
            .WriteTo.File(@"Logs\trace-.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 90)
        )
        .WriteTo.Logger(lg =>
            lg.Filter.ByIncludingOnly(Matching.FromSource<WttrClient>())
+           .Enrich.FromLogContext()
            .WriteTo.Console()
            .WriteTo.File(@"Logs\wttr-client-.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 90)
          )
        .WriteTo.Logger(lg =>
           lg
           .MinimumLevel.Error()
+          .Enrich.FromLogContext()
           .WriteTo.File(@"Logs\error-.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 90)
       )
       .CreateLogger();
