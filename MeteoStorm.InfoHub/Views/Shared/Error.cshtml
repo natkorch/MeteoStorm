@@ -1,0 +1,20 @@
+﻿@model MeteoStorm.InfoHub.Models.Home.ErrorViewModel;
+@{
+  ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Error.</h1>
+<h2 class="text-danger">An error occurred while processing your request.</h2>
+
+<div class="mt-3">
+  <p>
+    @if (Model.ShowRequestId)
+    {
+      <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    }
+  </p>
+  <p>
+    <strong>Error Message:</strong> <code>@Model.ErrorMessage</code>
+  </p>
+</div>
+
