@@ -1,8 +1,12 @@
 using MeteoStorm.DataAccess;
+using MeteoStorm.DataAccess.Constants;
+using MeteoStorm.DataAccess.Models;
 using MeteoStorm.InfoHub.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Services;
 using ILogger = Serilog.ILogger;
 
 namespace MeteoStorm.InfoHub
@@ -46,6 +50,9 @@ namespace MeteoStorm.InfoHub
         options.AddPolicy(Policies.Employees, policy => policy.RequireRole(AppRoles.Admin, AppRoles.Operator));
         options.AddPolicy(Policies.Clients, policy => policy.RequireRole(AppRoles.Client));
       });
+
+      builder.Services.AddScoped<PasswordHasher<User>>();
+      builder.Services.AddScoped<UserService>();
 
       var app = builder.Build();
 
