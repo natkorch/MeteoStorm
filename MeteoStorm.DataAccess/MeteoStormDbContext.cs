@@ -2,6 +2,7 @@
 using MeteoStorm.DataAccess.Configuration;
 using Microsoft.EntityFrameworkCore;
 using static System.Net.Mime.MediaTypeNames;
+using Microsoft.Extensions.Options;
 
 namespace MeteoStorm.DataAccess
 {
@@ -18,6 +19,7 @@ namespace MeteoStorm.DataAccess
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+      //optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=MeteoStormDb;Integrated Security=True;MultipleActiveResultSets=true;TrustServerCertificate=true");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,5 +30,6 @@ namespace MeteoStorm.DataAccess
 
     public DbSet<City> Cities { get; set; }
     public DbSet<MeteoDataEntry> MeteoDataEntries { get; set; }
+    public DbSet<User> Users { get; set; }
   }
 }

@@ -1,4 +1,4 @@
-﻿namespace MeteoStorm.InfoHub.Authorization
+﻿namespace MeteoStorm.DataAccess.Constants
 {
   public static class AppRoles
   {
